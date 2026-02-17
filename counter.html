@@ -25,24 +25,27 @@ button{
 button:hover{
     background-color: #357abd;
 }
-        </style>
+ </style>
     </head>
  <body>
-    <h1> Counter : <span id="d1">0</span></h1>
+    <h1> Counter : <span id="count">0</span></h1>
     <div>
-        <button id="inc" onclick="modify(1)">increase</button>
-        <button id="dec" onclick="modify(0)">decrease</button>
+        <button id="i" onclick="Update(1)">increase</button>
+        <button id="d" onclick="Update(0)">decrease</button>
     </div>
     <script>
         var count = 0;
         if (window.localStorage.getItem('count')) {
-            document.getElementById('d1').innerText = count = window.localStorage.getItem('count')
+            document.getElementById('count').innerText = count = window.localStorage.getItem('count')
         }
-        function modify(status) {
-            if (status)
-                document.getElementById('d1').innerText = ++count
-            else
-                document.getElementById('d1').innerText = --count
+        function Update(u) {
+            if (u){
+                document.getElementById('count').innerText = ++count
+            }
+                
+            else{
+                document.getElementById('count').innerText = --count
+            }
             window.localStorage.setItem('count', count)
         }
 

@@ -38,37 +38,31 @@ button:hover{
 <body>
     <h1>Add Todos</h1>
     <div>
-        <input type="text" id="d1">
-        <button onclick="add_todo()">Add Todo</button>
+        <input type="text" id="todo">
+        <button onclick="add()">Add Todo</button>
     </div>
-    <ul id="todo_list"></ul>
-
+    <ul id="list" type="none"></ul>
     <script>
         var todos = [];
         if (window.localStorage.getItem('todos')) {
             todos = JSON.parse(window.localStorage.getItem('todos'))
         }
-
         genui()
-
-        function add_todo() {
-            var input = document.getElementById('d1');
-            if (input.value.trim() === "") return;
+        function add() {
+            var input = document.getElementById('todo');
             todos.push(input.value);
             window.localStorage.setItem('todos', JSON.stringify(todos))
             genui();
         }
-
         function genui() {
-            var ui_list = document.getElementById('todo_list');
+            var ui_list = document.getElementById('list');
             ui_list.innerHTML = "";
             todos.forEach((todo, index) => {
-                ui_list.innerHTML += `<li>${todo} <button onclick="Delete(${index})">Delete</button>`
+                ui_list.innerHTML += `<li>${todo} <button onclick="remove(${i})">Remove</button>`
             });
         }
-
-        function Delete(index) {
-            todos.splice(index, 1);
+        function remove(i) {
+            todos.splice(i, 1);
             window.localStorage.setItem('todos', JSON.stringify(todos));
             genui();
         }
