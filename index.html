@@ -35,8 +35,7 @@
 </style>
 <body>
     <table id="t1" >
-        <tbody id="t_body1">
-        <tr>
+      <tr>
         <th onclick="sortTitle()">
             Title
         </th>
@@ -80,6 +79,8 @@
             discountUnits
         </th>
         </tr>
+        <tbody id="tbody">
+        
        </tbody> 
     </table>
     <button>Previous</button>
@@ -6110,9 +6111,9 @@
 	"discountUnits":"percent"
   }
 ];
-   var t_body1 = document.getElementById("t1");
+   var tbody = document.getElementById("tbody");
+   console.log(tbody);
     M.forEach(function(m){
-    var t_body1 = document.getElementById("tbody1");
     let table_row = document.createElement("tr");
     let table_title = document.createElement("td");
     let table_isbn = document.createElement("td");
@@ -6161,8 +6162,8 @@ table_row.appendChild(table_price);
 table_row.appendChild(table_curr);
 table_row.appendChild(table_disc);
 table_row.appendChild(table_discunits);
-    t_body1.appendChild(table_row);
- 
+console.log(tbody);
+    tbody.appendChild(table_row);
  });
     </script>
 </body>
