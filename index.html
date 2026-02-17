@@ -35,7 +35,7 @@
 </style>
 <body>
     <table id="t1" >
-        <tbody>
+        <tbody id="t_body1">
         <tr>
         <th onclick="sortTitle()">
             Title
@@ -6112,6 +6112,7 @@
 ];
    var t_body1 = document.getElementById("t1");
     M.forEach(function(m){
+    var t_body1 = document.getElementById("tbody1");
     let table_row = document.createElement("tr");
     let table_title = document.createElement("td");
     let table_isbn = document.createElement("td");
@@ -6119,8 +6120,8 @@
     let table_tnu = document.createElement("td");
     let img = document.createElement("img");
     img.src = m.thumbnailUrl;
-     img.width = 50;
-     table_tnu.appendChild(img);    
+    img.width = 50;
+    table_tnu.appendChild(img);   
     let table_sts = document.createElement("td");
     let table_aut = document.createElement("td");
     let table_cat = document.createElement("td");
