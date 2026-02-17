@@ -41,7 +41,9 @@ button:hover{
         <input type="text" id="todo">
         <button onclick="add()">Add Todo</button>
     </div>
-    <ul id="list" type="none"></ul>
+    <ul id="list" type="none">
+        
+    </ul>
     <script>
         var todos = [];
         if (window.localStorage.getItem('todos')) {
@@ -57,8 +59,8 @@ button:hover{
         function genui() {
             var ui_list = document.getElementById('list');
             ui_list.innerHTML = "";
-            todos.forEach((todo, index) => {
-                ui_list.innerHTML += `<li>${todo} <button onclick="remove(${i})">Remove</button>`
+            todos.forEach((todo, i) => {
+            ui_list.innerHTML += `<li>${todo}<button onclick="remove(${i})">Remove</button></li>`
             });
         }
         function remove(i) {
