@@ -1,0 +1,76 @@
+<html>
+<body>
+    <head>
+        <style>
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f8;
+    text-align: center;
+    margin-top: 80px;
+}
+h3{
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 500%;
+}
+input{
+    padding: 8px;
+    width: 220px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+button{
+    padding: 8px 14px;
+    margin-left: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #4d94ab;
+    color: white;
+    transition: 0.2s ease;
+}
+button:hover{
+    background-color: #357abd;
+}
+ </style>
+ </head>
+<h3>Todo List</h3>
+    <input type="text" id="task">
+    <button id="addBtn">Add todo</button>
+    <ul id="list" type="none"></ul>
+    <script>
+        var input = document.getElementById("task");
+        var addBtn = document.getElementById("addBtn");
+        var list = document.getElementById("list");
+        let tasks = JSON.parse(localStorage.getItem("tasks"));
+            var createTask = (task, index)=>{
+            var li = document.createElement("li");
+            var span = document.createElement("span");
+            span.textContent = task;
+            var btn = document.createElement("button");
+            btn.textContent = "Remove";
+            btn.addEventListener("click",()=> {
+                tasks.splice(index, 1);
+                localStorage.setItem("tasks", JSON.stringify(tasks));
+                li.remove();
+            });
+            li.appendChild(span);
+            li.appendChild(btn);
+            list.appendChild(li);
+        };
+        tasks.forEach((task,index)=> {
+            createTask(task,index);
+        });
+        addBtn.addEventListener("click", () => {
+            var value = input.value.trim();
+            if (value!=="") {
+                tasks.push(value);
+                localStorage.setItem("tasks", JSON.stringify(tasks));
+                createTask(value, tasks.length - 1);
+                input.value = "";
+            }
+        });
+    </script>
+</body>
+</html>
