@@ -27,29 +27,25 @@ button:hover{
 }
         </style>
     </head>
-<body>
-
-    <h1>Counter   :    <span id="count">0</span></h1> 
-    
-    <button id="increment">Increment</button>
-    <button id="decrement">Decrement</button>
+ <body>
+    <h1> Counter : <span id="d1">0</span></h1>
+    <div>
+        <button id="inc" onclick="modify(1)">increase</button>
+        <button id="dec" onclick="modify(0)">decrease</button>
+    </div>
     <script>
-        const countText = document.getElementById("count");
-        const incBtn = document.getElementById("increment");
-        const decBtn = document.getElementById("decrement");
-        let count = JSON.parse(localStorage.getItem("count"))||0;
-        countText.textContent = count;
-        incBtn.addEventListener("click",()=>{
-            count++;
-            countText.textContent = count;
-            localStorage.setItem("count",JSON.stringify(count));
-        });
-        decBtn.addEventListener("click",()=> {
-            count--;
-            countText.textContent = count;
-            localStorage.setItem("count", JSON.stringify(count));
-        });
-    </script>
+        var count = 0;
+        if (window.localStorage.getItem('count')) {
+            document.getElementById('d1').innerText = count = window.localStorage.getItem('count')
+        }
+        function modify(status) {
+            if (status)
+                document.getElementById('d1').innerText = ++count
+            else
+                document.getElementById('d1').innerText = --count
+            window.localStorage.setItem('count', count)
+        }
 
+    </script>
 </body>
 </html>

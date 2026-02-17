@@ -35,42 +35,44 @@ button:hover{
 }
  </style>
  </head>
-<h3>Todo List</h3>
-    <input type="text" id="task">
-    <button id="addBtn">Add todo</button>
-    <ul id="list" type="none"></ul>
+<body>
+    <h1>Add Todos</h1>
+    <div>
+        <input type="text" id="d1">
+        <button onclick="add_todo()">Add Todo</button>
+    </div>
+    <ul id="todo_list"></ul>
+
     <script>
-        var input = document.getElementById("task");
-        var addBtn = document.getElementById("addBtn");
-        var list = document.getElementById("list");
-        let tasks = JSON.parse(localStorage.getItem("tasks"));
-            var createTask = (task, index)=>{
-            var li = document.createElement("li");
-            var span = document.createElement("span");
-            span.textContent = task;
-            var btn = document.createElement("button");
-            btn.textContent = "Remove";
-            btn.addEventListener("click",()=> {
-                tasks.splice(index, 1);
-                localStorage.setItem("tasks", JSON.stringify(tasks));
-                li.remove();
+        var todos = [];
+        if (window.localStorage.getItem('todos')) {
+            todos = JSON.parse(window.localStorage.getItem('todos'))
+        }
+
+        genui()
+
+        function add_todo() {
+            var input = document.getElementById('d1');
+            if (input.value.trim() === "") return;
+            todos.push(input.value);
+            window.localStorage.setItem('todos', JSON.stringify(todos))
+            genui();
+        }
+
+        function genui() {
+            var ui_list = document.getElementById('todo_list');
+            ui_list.innerHTML = "";
+            todos.forEach((todo, index) => {
+                ui_list.innerHTML += `<li>${todo} <button onclick="Delete(${index})">Delete</button>`
             });
-            li.appendChild(span);
-            li.appendChild(btn);
-            list.appendChild(li);
-        };
-        tasks.forEach((task,index)=> {
-            createTask(task,index);
-        });
-        addBtn.addEventListener("click", () => {
-            var value = input.value.trim();
-            if (value!=="") {
-                tasks.push(value);
-                localStorage.setItem("tasks", JSON.stringify(tasks));
-                createTask(value, tasks.length - 1);
-                input.value = "";
-            }
-        });
+        }
+
+        function Delete(index) {
+            todos.splice(index, 1);
+            window.localStorage.setItem('todos', JSON.stringify(todos));
+            genui();
+        }
+
     </script>
 </body>
 </html>
